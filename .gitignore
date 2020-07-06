@@ -5,6 +5,10 @@ build/
 wheelhouse/
 __pycache__/
 
+docker/cmake
+docker/swig
+docker/*.tar.gz
+
 CMakeFiles
 
 py?
