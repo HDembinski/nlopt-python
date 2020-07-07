@@ -1,14 +1,17 @@
 FROM quay.io/pypa/manylinux2010_x86_64
 
-RUN yum update -y && yum install pcre-devel -y
-
 WORKDIR /tmp
-# Install cmake
-RUN make_cmake.sh
 
-WORKDIR /tmp
-# Install swig
-RUN make_swig.sh
+COPY install_cmake.sh .
+COPY install_swig.sh .
 
-RUN swig --help
+RUN yum install pcre-devel -y
+
+RUN ./install_cmake.sh
+RUN ./install_swig.sh
+
+RUN rm -rf cmake*
+RUN rm -rf swig*
+
 RUN cmake --version
+RUN swig -version
